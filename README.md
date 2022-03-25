@@ -29,7 +29,7 @@ Or to load everything as one big DataFrame:
 >>> df = pd.concat(gen_df, ignore_index=True)
 ```
 
-See also our accompanying [Jupyter notebook](notebooks.ipynb).
+See also our accompanying [Jupyter notebook](notebook.ipynb).
 
 ## How does the data look like?
 
