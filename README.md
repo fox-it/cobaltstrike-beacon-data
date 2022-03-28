@@ -1,5 +1,7 @@
 # Cobalt Strike Beacon Dataset
 
+https://research.nccgroup.com/2022/03/25/mining-data-from-cobalt-strike-beacons/
+
 ## What is it?
 
 * Open Dataset containing 128340 rows of Cobalt Strike Beacon metadata as JSON-lines
@@ -7,6 +9,7 @@
 * Team Server metadata (ip address, port, TLS certificate)
 * Enriched with GeoIP + ASN data
 * Original Beacon configuration block (deobfuscated) available in the `config_block` field
+  * Can be parsed using [`dissect.cobaltstrike`](https://github.com/fox-it/dissect.cobaltstrike) or any other Beacon parser of choice.
 * All binary data fields are base64 encoded
 
 ## How to load the data?
@@ -30,6 +33,18 @@ Or to load everything as one big DataFrame:
 ```
 
 See also our accompanying [Jupyter notebook](notebook.ipynb).
+
+## Exported Indicators of Compromise
+
+We have also exported the IP and Host indicators from the Beacon dataset to a CSV file: [`iocs-export.csv`](iocs-export.csv?raw=true).
+
+You can find the CSV export code in the notebook. Note that actors can arbitrarily configure domain and host headers, and the IP address could be a CDN, such as Cloudflare. So, be careful when using this for blocking purposes.
+                            
+Some handy tools for querying or exploring the CSV file:
+ 
+ * good old `grep` (or `git grep` when you have this repo checked out)
+ * [VisiData](https://www.visidata.org) (`pip install visidata`)
+ * [GitHub's Flat Viewer](https://flatgithub.com/fox-it/cobaltstrike-beacon-data/?filename=iocs-export.csv) (flatgithub.com)
 
 ## How does the data look like?
 
@@ -135,4 +150,3 @@ $ zcat beacons-2018.jsonl.gz | head -n 1 | jq .
   "org": "OVH SAS"
 }
 ```
-
